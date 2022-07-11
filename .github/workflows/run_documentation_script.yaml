@@ -11,7 +11,7 @@ jobs:
       - name: Checkout Tyk Documentation Generator
         uses: actions/checkout@master
         with:
-          name: byu-oit/tyk-documentation-generator
+          repository: byu-oit/tyk-documentation-generator
           ref: main
   
   run_script:
