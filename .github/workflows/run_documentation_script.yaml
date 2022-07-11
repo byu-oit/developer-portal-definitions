@@ -12,6 +12,7 @@ jobs:
         uses: actions/checkout@master
         with:
           name: byu-oit/tyk-documentation-generator
+          ref: main
   
   run_script:
     needs: get_script
