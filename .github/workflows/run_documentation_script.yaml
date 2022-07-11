@@ -20,10 +20,14 @@ jobs:
     steps:
       - name: Checkout Developer Portal Definitions Repo
         uses: actions/checkout@master
+
       - name: List all directories
         run: |
+          cd ..
           ls -la
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
+
       - name: Install dependencies
         run: npm install --save
