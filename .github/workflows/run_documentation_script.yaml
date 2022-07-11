@@ -1,0 +1,25 @@
+name: Run API Documentation Generator Script
+on:
+  push:
+    branches:
+      - automate
+
+jobs:
+  get_script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@master
+        with:
+          name: byu-oit/tyk-documentation-generator
+          ref: refs/heads/main
+  
+  run_script:
+    needs: get_script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Developer Portal Definitions Repo
+        uses: actions/checkout@master
+      - name: List all directories
+        run: |
+          ls -la
