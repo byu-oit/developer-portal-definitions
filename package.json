@@ -1,0 +1,22 @@
+{
+  "name": "tyk-documentation-generator",
+  "version": "1.0.0",
+  "description": "Generates API documentation for the new developer portal at developer.byu.edu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byu-oit/tyk-documentation-generator.git"
+  },
+  "author": "Brigham Young University",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byu-oit/tyk-documentation-generator/issues"
+  },
+  "homepage": "https://github.com/byu-oit/tyk-documentation-generator#readme",
+  "dependencies": {
+    "csv": "^6.2.0"
+  }
+}

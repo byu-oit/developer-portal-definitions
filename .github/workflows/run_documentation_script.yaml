@@ -4,16 +4,7 @@ on:
     branches:
       - automate
 
-jobs:
-  get_script:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Tyk Documentation Generator
-        uses: actions/checkout@master
-        with:
-          repository: byu-oit/tyk-documentation-generator
-          ref: main
-  
+jobs:  
   run_script:
     needs: get_script
     runs-on: ubuntu-latest
@@ -21,13 +12,14 @@ jobs:
       - name: Checkout Developer Portal Definitions Repo
         uses: actions/checkout@master
 
-      - name: List all directories
-        run: |
-          cd ..
-          ls -la
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
 
-      # - name: Install dependencies
-      #   run: npm install --save
+      - name: Install dependencies
+        run: npm install --save
+
+      - name: Run Script
+        run: node index.js
+      
+      - name: Print out csv file
+        run: cat apis.csv
