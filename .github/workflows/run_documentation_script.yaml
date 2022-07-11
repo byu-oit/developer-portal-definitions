@@ -8,7 +8,7 @@ jobs:
   get_script:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 
+      - name: Checkout Tyk Documentation Generator
         uses: actions/checkout@master
         with:
           name: byu-oit/tyk-documentation-generator
