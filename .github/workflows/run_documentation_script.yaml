@@ -13,7 +13,6 @@ jobs:
         with:
           repository: byu-oit/tyk-documentation-generator
           ref: main
-          token: ${{secrets.GPM_TOKEN}}
   
   run_script:
     needs: get_script
