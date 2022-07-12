@@ -2,7 +2,7 @@ name: Run API Documentation Generator Script
 on:
   push:
     branches:
-      - dev
+      - main
     paths:
       - swagger/**
 
@@ -36,8 +36,3 @@ jobs:
           git add .
           git commit -m "API List Updated"
           git push
-      
-      - name: Merge dev into main
-        run: |
-          git checkout dev
-          git merge main -m "API List Updated after PR"
