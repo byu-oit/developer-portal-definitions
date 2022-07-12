@@ -2,6 +2,7 @@ name: Run API Documentation Generator Script
 on:
   push:
     branches:
+      - dev
       - automate
     paths:
       - swagger/**
@@ -25,10 +26,19 @@ jobs:
       - name: Print out csv file
         run: cat apis.csv
       
+      - name: Setup Git Config
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      
       - name: Commit csv file
         run: |
           git status
           git add .
-          git commit -m "Generated new CSV file"
-          git fetch origin main
-          git push origin automate
+          git commit -m "API List Updated"
+          git push origin dev
+      
+      - name: Merge dev into main
+        run: |
+          git merge main -m "API List Updated"
