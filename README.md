@@ -1,6 +1,6 @@
 # developer-portal-definitions
 
-This is where all of the API Documentation for the new developer portal at [developer.byu.edu](developer.byu.edu) lives.
+This is where all of the API Documentation for the new developer portal at [https://developer.byu.edu](developer.byu.edu) lives.
 
 ## To add an API to the Developer Portal
 - Clone this repo
