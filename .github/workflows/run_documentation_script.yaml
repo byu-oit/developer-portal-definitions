@@ -34,11 +34,11 @@ jobs:
       
       - name: Commit csv file
         run: |
-          git status
           git add .
           git commit -m "API List Updated"
           git push origin dev
       
       - name: Merge dev into main
         run: |
+          git checkout dev
           git merge main -m "API List Updated"
