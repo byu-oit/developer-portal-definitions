@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - dev
-      - automate
     paths:
       - swagger/**
 
@@ -36,9 +35,9 @@ jobs:
         run: |
           git add .
           git commit -m "API List Updated"
-          git push origin dev
+          git push
       
       - name: Merge dev into main
         run: |
           git checkout dev
-          git merge main -m "API List Updated"
+          git merge main -m "API List Updated after PR"
