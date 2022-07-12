@@ -7,7 +7,4 @@ This is where all of the API Documentation for the new developer portal at [deve
 - Make a new branch off of main
 - Add your swagger document to the `swagger` folder
 - Commit your changes
-- Make a pull request that requests one of the following people to review
-  - Rick Winscot
-  - Gary Crye
-  - Brock May
+- Make a pull request that requests the `SpecOps Developer Team` to review your changes
