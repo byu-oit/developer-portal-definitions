@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - automate
+    paths:
+      - swagger/**
 
 jobs:  
   run_script:
@@ -22,3 +24,11 @@ jobs:
       
       - name: Print out csv file
         run: cat apis.csv
+      
+      - name: Commit csv file
+        run: |
+          git status
+          git add .
+          git commit -m "Generated new CSV file"
+          git fetch origin main
+          git push origin automate
