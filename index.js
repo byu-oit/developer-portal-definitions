@@ -44,38 +44,22 @@ function buildCsvRow(fileString) {
 /** 
  * Goes through the swagger directory to build api documentation pages that can be imported into brightspot using a csv file
 */
-function main() {
+async function main() {
+    // Create csv file
+    const header = String(["Headline","Sub Headline","Slug","Author Title","Body","SEO Title","SEO Description","SEO Keywords","Tags","URL","Update Date"])
+    fs.writeFileSync("apis.csv", header, "utf-8")
+
     // Look in swagger directory
     const directoryPath = path.join(__dirname, './swagger');
-    fs.readdir(directoryPath, function (err, files) {
-        // handling file read error
-        if (err) {
-            return console.log('Unable to scan directory: ' + err);
-        } 
-
-        // Write the csv header
-        const header = String(["Headline","Sub Headline","Slug","Author Title","Body","SEO Title","SEO Description","SEO Keywords","Tags","URL","Update Date"])
-        fs.writeFile("apis.csv", header, "utf-8", (err) => {
-            if (err) console.log(err);
-            else console.log("Data saved");
-        });
-
-        // for each file in the directory...
-        files.forEach(function (file) {
-            try {
-                // Open swagger doc and build the csv row
-                console.log(file)
-                const csvRow = buildCsvRow(file)
-
-                // Append the csv row to the csv file
-                fs.appendFile("apis.csv", String('\n' + csvRow), "utf-8", (err) => {
-                    if (err) throw err;
-                });
-            } catch(err) {
-                console.log(err)
-            }
-        });
-    });
+    fs.readdirSync(directoryPath).map(fileName => {
+        try {
+            console.log(fileName)
+            const csvRow = buildCsvRow(fileName)
+            fs.appendFileSync("./apis.csv", String(`\n`+csvRow))
+        } catch (error) {
+            console.error(error)
+        }
+    })
 }
 
 main()
