@@ -2,7 +2,7 @@ name: Run API Documentation Generator Script
 on:
   push:
     branches:
-      - dev
+      - main
     paths:
       - swagger/**
 
@@ -11,13 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Developer Portal Definitions Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
-
-      - name: Install dependencies
-        run: npm install --save
+        with:
+          node_version: 16
 
       - name: Run Script
         run: node index.js
@@ -27,7 +26,6 @@ jobs:
       
       - name: Setup Git Config
         run: |
-          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       
@@ -36,8 +34,3 @@ jobs:
           git add .
           git commit -m "API List Updated"
           git push
-      
-      - name: Merge dev into main
-        run: |
-          git checkout dev
-          git merge main -m "API List Updated after PR"

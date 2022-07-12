@@ -23,8 +23,7 @@ function buildCsvRow(fileString) {
     const tags = ""
 
     // Build article URL by taking out the .json and any whitespaces
-    let url = headline.replace(".json", "")
-    url = headline.replace(" ", "")
+    const url = headline.replace(".json", "").replace(" ", "")
 
     // Get today's date to build last updated property
     var today = new Date();
