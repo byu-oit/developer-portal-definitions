@@ -1,0 +1,86 @@
+name: Generate CSV for Brightspot
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - swagger/**
+      - .github/workflows/generate_csv.yaml
+
+jobs:
+  generate-csv:
+    name: 🚀
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Generate apis.csv
+        run: node index.js
+
+      - name: Generate release tag
+        id: date
+        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d_%H-%M-%S')"
+
+      # Using a commit hash due to https://github.com/softprops/action-gh-release/issues/222#issuecomment-1118176601
+      - name: Create GitHub release
+        id: release_csv
+        uses: softprops/action-gh-release@cd28b0f5ee8571b76cfdaa62a30d51d752317477
+        with:
+          files: apis.csv
+          tag_name: ${{ steps.date.outputs.timestamp }}
+
+      - name: Send Teams Notification
+        uses: skitionek/notify-microsoft-teams@master
+        with:
+          webhook_url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+          raw: >-
+            {
+              "type": "message",
+              "attachments":[
+                {
+                  "contentType": "application/vnd.microsoft.card.adaptive",
+                  "contentUrl": null,
+                  "content": {
+                    "type": "AdaptiveCard",
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "version": "1.4",
+                    "msteams": {
+                      "width": "Full"
+                    },
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "text": "**API definition(s) have changed**",
+                        "wrap": true
+                      },
+                      {
+                        "type": "TextBlock",
+                        "text": "Please update the [list of APIs on developer.byu.edu](https://developer.byu.edu/api-search) and then react to this message with 👍 once it's been done.\n\nInstructions:\n- Download the CSV\n- Navigate to the Developer site in Brightspot\n- Click on the searchbar\n- On the bottom left under **Create**, in the dropdown menu, select **Article CSV Importer**\n- Click **New**\n- Upload the CSV to Brightspot",
+                        "wrap": true
+                      },
+                      {
+                        "type": "ActionSet",
+                        "actions": [
+                          {
+                            "type": "Action.OpenUrl",
+                            "title": "Download CSV",
+                            "url": "${{ fromJSON(steps.release_csv.outputs.assets)[0].browser_download_url }}"
+                          },
+                          {
+                            "type": "Action.OpenUrl",
+                            "title": "Open Brightspot",
+                            "url": "https://brightspot.byu.edu/cms/"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
