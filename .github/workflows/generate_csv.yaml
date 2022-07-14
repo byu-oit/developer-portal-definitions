@@ -61,7 +61,7 @@ jobs:
                       },
                       {
                         "type": "TextBlock",
-                        "text": "Please update the [list of APIs on developer.byu.edu](https://developer.byu.edu/api-search) and then react to this message with 👍 once it's been done.\n\nInstructions:\n- Download the CSV\n- Navigate to the Developer site in Brightspot\n- Search for **apis.csv** at the top and select it.\n- Change the parameter from **Keep Existing** to **New Upload** and drag/upload the file into heading.n- Under Tags, click on the **+** and select **API**.n- Click on Import in the top right.",
+                        "text": "Please update the [list of APIs on developer.byu.edu](https://developer.byu.edu/api-search) and then react to this message with 👍 once it's been done.\n\nInstructions:\n- Download the CSV\n- Navigate to the Developer site in Brightspot\n- Search for **apis.csv** at the top and select it.\n- Change the parameter from **Keep Existing** to **New Upload** and drag/upload the file into heading.\n- Under Tags, click on the **+** and select **API**.\n- Click on Import in the top right.",
                         "wrap": true
                       },
                       {
